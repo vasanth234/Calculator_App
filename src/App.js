@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {useState} from 'react'
+import Keypad from './Keypad'; // Correct the import statement to reference 'Keypad'
+import './App.css'
+const App = () => {
+  const [data,setData]=useState('');
 
-function App() {
+  function handleclick(value){
+    setData(data+value)
+  }
+
+  function Calculate(value){
+    const evaluated=eval(data);
+    setData(evaluated);
+  }
+
+  function Cleared(){
+    setData('')
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <h2 className='textcolor'>Calculator app is here</h2>
+      <div className='calculator'>
+        <input type='text' value={data} className='output' />
+        <Keypad handleclick={handleclick} handlecalculate={Calculate} handleclear={Cleared}/> {/* Correct the component usage */}
+      </div>
     </div>
   );
 }
